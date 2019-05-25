@@ -1,25 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import Cipher from './helpers/Cipher';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      message: '',
-    }
-    
-    const ws = new WebSocket('ws://192.168.43.61:8080');
-
-    ws.onopen = () => {
-      console.log('connected to webserver');
-    };
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <Text>{ this.state.message }</Text>
+        <Text>Open up App.js to start working on your app!</Text>
       </View>
     );
   }
