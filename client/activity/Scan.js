@@ -9,7 +9,7 @@ export default class Scan extends Component {
     };
 
     static navigationOptions = {
-        title: 'Scan QR Code',
+        title: 'Scan QR Code', 
     }
 
     componentDidMount() {
