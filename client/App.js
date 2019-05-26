@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default class App extends Component {
-  render() {
-    return (
-      null
-    );
-  }
-} 
+// Import other activities.
+import Home from './activity/Home';
+import Scan from './activity/Scan';
+
+const MainNavigator = createStackNavigator({
+  Home: { screen: Home },
+  Scan: { screen: Scan },
+});
+
+const App = createAppContainer(MainNavigator);
+
+export default App;

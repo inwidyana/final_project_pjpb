@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
-export default class Scanner extends Component {
+export default class Scan extends Component {
     state = {
         hasCameraPermission: null,
         lastScannedUrl: null,
     };
+
+    static navigationOptions = {
+        title: 'Scan QR Code',
+    }
 
     componentDidMount() {
         this._requestCameraPermission();
