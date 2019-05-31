@@ -1,5 +1,5 @@
 module.exports = (server) => {
-    const constants = require('./constants');
+    const Constant = require('./Constant');
     const io = require('socket.io')(server);
 
     io.on('connection', client => {
@@ -17,5 +17,5 @@ module.exports = (server) => {
         return next(new Error('authentication error'));
     });
 
-    io.listen(constants.socket.port);
+    io.listen(Constant.socket.port);
 };
