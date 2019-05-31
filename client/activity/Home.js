@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
 import io from 'socket.io-client';
-import Constants from '../helpers/Constants';
+import Constant from '../helpers/Constant';
+import { Registration } from '../helpers/Authentication';
 
 export default class Home extends Component {
     constructor(props) {
@@ -9,11 +10,21 @@ export default class Home extends Component {
 
         this.scanQRCode = this.scanQRCode.bind(this);
 
-        const socket = io(Constants.server.url, {
-            query: {
-                token: 'password',
-            }
-        });
+        // const socket = io(Constant.server.url, {
+        //     query: {
+        //         token: 'password',
+        //     }
+        // });
+
+        if (true) {
+            this.switchToRegistrationScreen();
+        }
+    }
+
+    switchToRegistrationScreen() {
+        const { navigate } = this.props.navigation;
+
+        navigate('Registration');
     }
 
     scanQRCode() {
