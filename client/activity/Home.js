@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'react-native';
 import io from 'socket.io-client';
 import Constant from '../helpers/Constant';
-import { Registration } from '../helpers/Authentication';
 
 export default class Home extends Component {
     constructor(props) {
@@ -17,14 +16,14 @@ export default class Home extends Component {
         // });
 
         if (true) {
-            this.switchToRegistrationScreen();
+            this.switchToLoginScreen();
         }
     }
 
-    switchToRegistrationScreen() {
+    switchToLoginScreen() {
         const { navigate } = this.props.navigation;
 
-        navigate('Registration');
+        navigate('Login');
     }
 
     scanQRCode() {

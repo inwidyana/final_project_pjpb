@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Button, TextInput, View } from 'react-native';
+import { Registration as RegistrationRequest } from '../helpers/Authentication';
 
 export default class Registration extends Component {
+    static navigationOptions = {
+        header: null,
+    };
+
     constructor(props) {
         super(props);
 
@@ -13,6 +18,7 @@ export default class Registration extends Component {
         }
 
         this.switchToHomeScreen = this.switchToHomeScreen.bind(this);
+        this.switchToLoginScreen = this.switchToLoginScreen.bind(this);
         this.register = this.register.bind(this);
     }
 
@@ -22,12 +28,18 @@ export default class Registration extends Component {
         navigate('Home');
     }
 
+    switchToLoginScreen() {
+        const { navigate } = this.props.navigation;
+
+        navigate('Login');
+    }
+
     register() {
-        let login = new Registration();
+        let login = new RegistrationRequest();
         login.setEmail(this.state.email);
         login.setPassword(this.state.password);
         login.setName(this.state.name);
-        login.send().then(auth => this.switchToHomeScreen);
+        login.send().then(auth => this.switchToHomeScreen());
     }
 
     render() {
@@ -64,6 +76,11 @@ export default class Registration extends Component {
                 <Button
                     title="Register"
                     onPress={this.register}
+                />
+
+                <Button
+                    title="Login to existing account"
+                    onPress={this.switchToLoginScreen}
                 />
             </View>
         );

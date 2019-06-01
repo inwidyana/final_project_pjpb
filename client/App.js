@@ -4,11 +4,13 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from './activity/Home';
 import Scan from './activity/Scan';
 import Registration from './activity/Registration';
+import Login from './activity/Login';
 
 const MainNavigator = createStackNavigator({
   Home: { screen: Home },
   Scan: { screen: Scan },
   Registration: { screen: Registration },
+  Login: { screen: Login },
 });
 
 const App = createAppContainer(MainNavigator);
