@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
-import { Button, TextInput, View } from 'react-native';
+import { Button, TextInput, View, StyleSheet } from 'react-native';
 import { Login as LoginRequest } from '../helpers/Authentication';
+
+const BLUE = "#428AF8";
+const LIGHT_GRAY = "#D3D3D3";
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        margin: 20,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    input: {
+        width: "80%",
+        height: "8%",
+        padding: 10,
+        marginBottom: 10,
+    },
+});
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -39,30 +58,34 @@ export default class Login extends Component {
 
     render() {
         return (
-            <View style={{ padding: 10 }}>
+            <View style = {styles.container}>
                 <TextInput
-                    style={{ height: 40 }}
+                    style={styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
                     placeholder="Enter your email address!"
                     onChangeText={(email) => this.setState({ email })}
                 />
-
                 <TextInput
-                    style={{ height: 40 }}
+                    style={styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
                     placeholder="Enter your password!"
                     autoCorrect={false}
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({ password })}
                 />
-
-                <Button
-                    title="Login"
-                    onPress={this.login}
-                />
-
-                <Button
-                    title="Register a new account"
-                    onPress={this.switchToRegistrationScreen}
-                />
+                <View>
+                    <Button
+                        title="Login"
+                        onPress={this.login}
+                    />
+                    <View style={{flex: 0.1}}/>
+                    <Button
+                        title="Register a new account"
+                        onPress={this.switchToRegistrationScreen}
+                    />
+                </View>
             </View>
         );
     }
