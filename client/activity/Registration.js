@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
-import { Button, TextInput, View } from 'react-native';
+import { StyleSheet, Button, TextInput, View, Spacer } from 'react-native';
 import { Registration as RegistrationRequest } from '../helpers/Authentication';
+
+const BLUE = "#428AF8";
+const LIGHT_GRAY = "#D3D3D3";
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        margin: 20,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    input: {
+        width: "80%",
+        height: "8%",
+        padding: 10,
+        marginBottom: 10,
+    },
+});
 
 export default class Registration extends Component {
     static navigationOptions = {
@@ -42,46 +61,92 @@ export default class Registration extends Component {
         login.send().then(auth => this.switchToHomeScreen());
     }
 
+    // render() {
+    //     return (
+    //         <View style={styles.container}>
+    //             <TextInput
+    //                 style={{ height: 40 }}
+    //                 placeholder="Enter your name!"
+    //                 onChangeText={(name) => this.setState({ name })}
+    //             />
+
+    //             <TextInput
+    //                 style={{ height: 40 }}
+    //                 placeholder="Enter your email address!"
+    //                 onChangeText={(email) => this.setState({ email })}
+    //             />
+
+    //             <TextInput
+    //                 style={{ height: 40 }}
+    //                 placeholder="Enter your password!"
+    //                 autoCorrect={false}
+    //                 secureTextEntry={true}
+    //                 onChangeText={(password) => this.setState({ password })}
+    //             />
+
+    //             <TextInput
+    //                 style={{ height: 40 }}
+    //                 placeholder="Confirm your password!"
+    //                 autoCorrect={false}
+    //                 secureTextEntry={true}
+    //                 onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+    //             />
+
+    //             <Button
+    //                 title="Register"
+    //                 onPress={this.register}
+    //             />
+
+    //             <Button
+    //                 title="Login to existing account"
+    //                 onPress={this.switchToLoginScreen}
+    //             />
+    //         </View>
+    //     );
+    // }
+
     render() {
         return (
-            <View style={{ padding: 10 }}>
+            <View style = {styles.container}>
                 <TextInput
-                    style={{ height: 40 }}
-                    placeholder="Enter your name!"
-                    onChangeText={(name) => this.setState({ name })}
+                    style = {styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
+                    placeholder = 'Enter your name!'
+                    onChangeText = {(name) => this.setState({ name })}
                 />
-
                 <TextInput
-                    style={{ height: 40 }}
-                    placeholder="Enter your email address!"
-                    onChangeText={(email) => this.setState({ email })}
+                    style = {styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
+                    placeholder = 'Enter your email address!'
+                    onChangeText = {(email) => this.setState({ email })}
                 />
-
                 <TextInput
-                    style={{ height: 40 }}
-                    placeholder="Enter your password!"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                    onChangeText={(password) => this.setState({ password })}
+                    style = {styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
+                    placeholder = 'Enter your password!'
+                    onChangeText = {(password) => this.setState({ password })}
                 />
-
                 <TextInput
-                    style={{ height: 40 }}
-                    placeholder="Confirm your password!"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                    onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+                    style = {styles.input}
+                    selectionColor={BLUE}
+                    underlineColorAndroid={LIGHT_GRAY}
+                    placeholder = 'Confirm your password!'
+                    onChangeText = {(confirmPassword) => this.setState({ confirmPassword })}
                 />
-
-                <Button
-                    title="Register"
-                    onPress={this.register}
-                />
-
-                <Button
-                    title="Login to existing account"
-                    onPress={this.switchToLoginScreen}
-                />
+                <View>
+                    <Button
+                        title = "Register"
+                        onPress = {this.register}
+                    />
+                    <View style={{flex: 0.1}}/>
+                    <Button
+                        title = "Login to existing account"
+                        onPress = {this.switchToLoginScreen}
+                    />
+                </View>
             </View>
         );
     }
