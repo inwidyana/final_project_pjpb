@@ -1,4 +1,4 @@
-var RSAKey = require('react-native-_rsa');
+var RSAKey = require('react-native-rsa');
 
 export default class Cipher {
     generateKeyPair() {

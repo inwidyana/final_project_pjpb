@@ -32,16 +32,40 @@ export default class Login extends Component {
         this.state = {
             email: null,
             password: null,
+            ready: false,
         }
 
         this.switchToRegistrationScreen = this.switchToRegistrationScreen.bind(this);
+        this.checkReady = this.checkReady.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.login = this.login.bind(this);
+    }
+
+    checkReady() {
+        const emailFilled = (this.state.email !== null);
+        const passwordFilled = (this.state.email !== null);
+
+        if (emailFilled && passwordFilled) {
+            this.setState({ ready: true });
+        }
+    }
+
+    onEmailChange(email) {
+        this.setState({ email: email }, () => this.checkReady());
+    }
+
+    onPasswordChange(password) {
+        this.setState({ password: password }, () => this.checkReady());
     }
 
     login() {
-        let login = new LoginRequest();
-        login.setEmail(this.state.email);
-        login.setPassword(this.state.password);
-        login.send().then(auth => this.switchToHomeScreen());
+        if (this.state.ready) {
+            let login = new LoginRequest();
+            login.setEmail(this.state.email);
+            login.setPassword(this.state.password);
+            login.send().then(auth => this.switchToHomeScreen());
+        }
     }
 
     switchToHomeScreen() {
@@ -64,7 +88,7 @@ export default class Login extends Component {
                     selectionColor={BLUE}
                     underlineColorAndroid={LIGHT_GRAY}
                     placeholder="Enter your email address!"
-                    onChangeText={(email) => this.setState({ email })}
+                    onChangeText={(email) => this.onEmailChange(email)}
                 />
                 <TextInput
                     style={styles.input}
@@ -73,7 +97,7 @@ export default class Login extends Component {
                     placeholder="Enter your password!"
                     autoCorrect={false}
                     secureTextEntry={true}
-                    onChangeText={(password) => this.setState({ password })}
+                    onChangeText={(password) => this.onPasswordChange(password)}
                 />
                 <View>
                     <Button

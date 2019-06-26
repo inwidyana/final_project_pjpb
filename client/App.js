@@ -1,17 +1,21 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 // Import other activities.
-import Home from './activity/Home';
 import Scan from './activity/Scan';
+import Home from './activity/Home';
 import Registration from './activity/Registration';
 import Login from './activity/Login';
 
-const MainNavigator = createStackNavigator({
-  Home: { screen: Home },
-  Scan: { screen: Scan },
-  Registration: { screen: Registration },
-  Login: { screen: Login },
-});
+const MainNavigator = createStackNavigator(
+  {
+    Scan: { screen: Scan },
+    Home: { screen: Home },
+    Registration: { screen: Registration },
+    Login: { screen: Login },
+  }, 
+  {
+    initialRouteName: 'Home'
+  });
 
 const App = createAppContainer(MainNavigator);
 

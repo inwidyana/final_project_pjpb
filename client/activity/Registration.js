@@ -58,7 +58,10 @@ export default class Registration extends Component {
         login.setEmail(this.state.email);
         login.setPassword(this.state.password);
         login.setName(this.state.name);
-        login.send().then(auth => this.switchToHomeScreen());
+        login.send().then((auth) => {
+            this._storeData();
+            this.switchToHomeScreen()
+        });
     }
 
     // render() {
