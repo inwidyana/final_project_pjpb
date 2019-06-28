@@ -47,7 +47,7 @@ export class Login extends Authentication {
                         });
                     }
 
-                    reject(r);
+                    reject(res.status);
                 })
                 .catch(err => reject(err));
         });
