@@ -5,6 +5,7 @@ import Scan from './activity/Scan';
 import Home from './activity/Home';
 import Registration from './activity/Registration';
 import Login from './activity/Login';
+import ScanMe from './activity/ScanMe';
 
 const MainNavigator = createStackNavigator(
   {
@@ -12,6 +13,7 @@ const MainNavigator = createStackNavigator(
     Home: { screen: Home },
     Registration: { screen: Registration },
     Login: { screen: Login },
+    ScanMe: { screen: ScanMe },
   }, 
   {
     initialRouteName: 'Home'

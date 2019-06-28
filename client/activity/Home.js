@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import { Button, SectionList, Text } from 'react-native';
+import { Button, SectionList, Text, View } from 'react-native';
 import io from 'socket.io-client';
 import Constant from '../helpers/Constant';
 
 export default class Home extends Component {
     static navigationOptions = ({ navigation }) => ({
         headerRight: (
-            <Button title="Scan QR Code"
-                onPress={() => navigation.getParam('Scan')()}
-            />
+            <View>
+                <Button title="My QR Code"
+                    onPress={() => navigation.getParam('ScanMe')()}
+                />
+
+                <Button title="Scan QR Code"
+                    onPress={() => navigation.getParam('Scan')()}
+                />
+            </View>
         )
     });
 
     componentDidMount() {
-        this.props.navigation.setParams({ Scan: this.scanQRCode });
+        this.props.navigation.setParams({ 
+            Scan: this.scanQRCode,
+            ScanMe: this.switchToScanMe
+        });
     }
 
     constructor(props) {
         super(props);
 
         this.scanQRCode = this.scanQRCode.bind(this);
+        this.switchToLoginScreen = this.switchToLoginScreen.bind(this);
+        this.switchToScanMe = this.switchToScanMe.bind(this);
 
         // const socket = io(Constant.server.url, {
         //     query: {
@@ -42,6 +53,12 @@ export default class Home extends Component {
         const { navigate } = this.props.navigation;
 
         navigate('Login');
+    }
+
+    switchToScanMe() {
+        const { navigate } = this.props.navigation;
+
+        navigate('ScanMe');
     }
 
     render() {

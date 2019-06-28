@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Keypair from '../helpers/Keypair';
 import { StyleSheet, Button, TextInput, View, Spacer } from 'react-native';
 import { Registration as RegistrationRequest } from '../helpers/Authentication';
 
@@ -60,6 +61,7 @@ export default class Registration extends Component {
         login.setName(this.state.name);
         login.send().then((auth) => {
             this._storeData();
+            Keypair.generate().store();
             this.switchToHomeScreen()
         });
     }
