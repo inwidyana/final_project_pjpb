@@ -55,12 +55,11 @@ export default class Registration extends Component {
     }
 
     register() {
-        let login = new RegistrationRequest();
-        login.setEmail(this.state.email);
-        login.setPassword(this.state.password);
-        login.setName(this.state.name);
-        login.send().then((auth) => {
-            this._storeData();
+        let registration = new RegistrationRequest();
+        registration.setEmail(this.state.email);
+        registration.setPassword(this.state.password);
+        registration.setName(this.state.name);
+        registration.send().then((auth) => {
             Keypair.generate().store();
             this.switchToHomeScreen()
         });

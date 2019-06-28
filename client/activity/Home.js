@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, SectionList, Text, View } from 'react-native';
+import { Button, SectionList, Text, View, TouchableHighlight } from 'react-native';
 import io from 'socket.io-client';
 import Constant from '../helpers/Constant';
 
@@ -8,29 +8,20 @@ export default class Home extends Component {
         headerRight: (
             <View>
                 <Button title="My QR Code"
-                    onPress={() => navigation.getParam('ScanMe')()}
+                    onPress={() => navigation.navigate('ScanMe')}
                 />
 
                 <Button title="Scan QR Code"
-                    onPress={() => navigation.getParam('Scan')()}
+                    onPress={() => navigation.navigate('Scan')}
                 />
             </View>
         )
     });
 
-    componentDidMount() {
-        this.props.navigation.setParams({ 
-            Scan: this.scanQRCode,
-            ScanMe: this.switchToScanMe
-        });
-    }
-
     constructor(props) {
         super(props);
 
-        this.scanQRCode = this.scanQRCode.bind(this);
         this.switchToLoginScreen = this.switchToLoginScreen.bind(this);
-        this.switchToScanMe = this.switchToScanMe.bind(this);
 
         // const socket = io(Constant.server.url, {
         //     query: {
@@ -43,22 +34,14 @@ export default class Home extends Component {
         }
     }
 
-    scanQRCode = () => {
-        const { navigate } = this.props.navigation;
-
-        navigate('Scan');
-    }
-
     switchToLoginScreen() {
         const { navigate } = this.props.navigation;
 
         navigate('Login');
     }
 
-    switchToScanMe() {
-        const { navigate } = this.props.navigation;
-
-        navigate('ScanMe');
+    switchToChat() {
+        // Do something.
     }
 
     render() {
@@ -69,14 +52,21 @@ export default class Home extends Component {
             // />
 
             <SectionList
-                renderItem={({ item, index, section }) => <Text key={index}>{item}</Text>}
-                renderSectionHeader={({ section: { title } }) => (
-                    <Text style={{ fontWeight: 'bold' }}>{title}</Text>
+                renderItem={({ item, index, section: { id, title, data } }) => (
+                    <TouchableHighlight onPress={this.switchToChat}>
+                        <View>
+                            <Text>{title}</Text>
+                            <Text>{data}</Text>
+                        </View>
+                    </TouchableHighlight>
                 )}
+                // renderSectionHeader={({ section: { title } }) => (
+                //     <Text style={{ fontWeight: 'bold' }}>{title}</Text>
+                // )}
                 sections={[
-                    { title: 'John Doe', data: ['Hello There'] },
-                    { title: 'Jane Doe', data: ['Test'] },
-                    { title: 'Jean Doe', data: ['Test'] },
+                    { id: 1, title: 'John Doe', data: ['Hello There'] },
+                    { id: 2, title: 'Jane Doe', data: ['Test'] },
+                    { id: 3, title: 'Jean Doe', data: ['Test'] },
                 ]}
                 keyExtractor={(item, index) => item + index}
             />
