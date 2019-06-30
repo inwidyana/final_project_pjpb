@@ -1,25 +1,18 @@
 import Cipher from './Cipher';
 import { AsyncStorage } from 'react-native';
 
-storage = '@key';
+storage = '@keys';
+
+function _getDataKey(key) {
+    return (storage + ':' + key);
+}
+
 async function _storeData(key, value) {
-    try {
-        await AsyncStorage.setItem(storage + ':' + key, value);
-    } catch (error) {
-        throw Error(error);
-    }
+    return AsyncStorage.setItem(_getDataKey(key), value);
 }
 
 async function _retrieveData(key) {
-    try {
-        const value = await AsyncStorage.getItem(storage + ':' + key);
-        if (value !== null) {
-            return value;
-        }
-    }
-    catch (error) {
-        throw Error(error);
-    }
+    return AsyncStorage.getItem(_getDataKey(key));
 }
 
 function _storePublicKey(key) { _storeData('public', key); }
@@ -36,7 +29,7 @@ export default class Keypair {
 
     static generate() {
         key = (new Cipher()).generateKeyPair();
-        
+
         return new Keypair(key.public, key.private);
     }
 

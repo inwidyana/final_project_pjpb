@@ -12,6 +12,12 @@ export default class Scan extends Component {
         title: 'Scan QR Code', 
     }
 
+    addFriendByPublicKey(newFriendPublicKey) {
+        const { navigate } = this.props.navigation;
+
+        navigate('AddFriend', { newFriendPublicKey: newFriendPublicKey });
+    }
+
     componentDidMount() {
         this._requestCameraPermission();
     }
@@ -26,7 +32,8 @@ export default class Scan extends Component {
     _handleBarCodeRead = result => {
         if (result.data !== this.state.lastScannedUrl) {
             LayoutAnimation.spring();
-            this.setState({ lastScannedUrl: result.data });
+            // this.setState({ lastScannedUrl: result.data });
+            this.addFriendByPublicKey(result.data);
         }
     };
 
@@ -34,21 +41,26 @@ export default class Scan extends Component {
         return (
             <View style={styles.container}>
 
-                {this.state.hasCameraPermission === null
-                    ? <Text>Requesting for camera permission</Text>
-                    : this.state.hasCameraPermission === false
-                        ? <Text style={{ color: '#fff' }}>
-                            Camera permission is not granted
-                </Text>
-                        : <BarCodeScanner
-                            onBarCodeRead={this._handleBarCodeRead}
-                            style={{
-                                height: Dimensions.get('window').height,
-                                width: Dimensions.get('window').width,
-                            }}
-                        />}
+                {
+                    this.state.hasCameraPermission === null ?
+                        <Text>Requesting for camera permission</Text>
+                    : 
+                        this.state.hasCameraPermission === false ?
+                            <Text style={{ color: '#fff' }}>
+                                Camera permission is not granted
+                            </Text>
+                        : 
+                            <BarCodeScanner
+                                onBarCodeRead={this._handleBarCodeRead}
+                                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+                                style={{
+                                    height: Dimensions.get('window').height,
+                                    width: Dimensions.get('window').width,
+                                }}
+                            />
+                }
 
-                {this._maybeRenderUrl()}
+                {/* {this._maybeRenderUrl()} */}
 
                 <StatusBar hidden />
             </View>

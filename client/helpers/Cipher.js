@@ -5,8 +5,8 @@ export default class Cipher {
         this._rsa.generate(Cipher._BITS, Cipher._EXPONENT);
 
         return {
-            public: this._rsa.getPublicString(),
-            private: this._rsa.getPrivateString(),
+            public: JSON.parse(this._rsa.getPublicString()).n,
+            private: JSON.parse(this._rsa.getPrivateString()).n,
         };
     }
 

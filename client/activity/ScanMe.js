@@ -9,7 +9,9 @@ export default class ScanMe extends Component {
     }
 
     componentDidMount() {
-        Keypair.retrievePublicKey().then(key => this.setState({ publicKey: key }));
+        Keypair.retrievePublicKey().then(key => {
+            this.setState({ publicKey: key })
+        });
     }
 
     render() {
@@ -18,11 +20,13 @@ export default class ScanMe extends Component {
         }
         else {
             return (
-                <QRCode
-                    value={this.state.publicKey}
-                    size={200}
-                    bgColor='black'
-                    fgColor='white' />
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <QRCode
+                        value={this.state.publicKey}
+                        size={300}
+                        bgColor='black'
+                        fgColor='white' />
+                </View>
             );
         }
     }
