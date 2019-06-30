@@ -5,8 +5,8 @@ export default class Cipher {
         this._rsa.generate(Cipher._BITS, Cipher._EXPONENT);
 
         return {
-            public: JSON.parse(this._rsa.getPublicString()).n,
-            private: JSON.parse(this._rsa.getPrivateString()).n,
+            public: this._rsa.getPublicString(),
+            private: this._rsa.getPrivateString(),
         };
     }
 
@@ -20,20 +20,28 @@ export default class Cipher {
         this._rsa.setPrivateString(key);
     }
 
-    publicEncrypt(message) {
-        const publicKeyNotSet = (this._publicKey === null);
-
-        if (publicKeyNotSet) throw Error('Public key has not been set!');
+    encrypt(message) {
+        this._throwIfPublicKeyNotSet();
 
         return this._rsa.encrypt(message);
     }
 
-    privateDecrypt(message) {
+    decrypt(message) {
+        this._throwIfPrivateKeyNotSet();
+
+        return this._rsa.decrypt(message);
+    }
+
+    _throwIfPrivateKeyNotSet() {
         const privateKeyNotSet = this._privateKey === null;
 
         if (privateKeyNotSet) throw Error('Private key has not been set!');
+    }
 
-        return this._rsa.decrypt(message);
+    _throwIfPublicKeyNotSet() {
+        const publicKeyNotSet = this._publicKey === null;
+
+        if (publicKeyNotSet) throw Error('Public key has not been set!');
     }
 
     // Private fields.

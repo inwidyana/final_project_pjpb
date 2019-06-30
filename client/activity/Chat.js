@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import Friend from '../helpers/Friend';
-import { AsyncStorage } from 'react-native';
 
 export default class Chat extends Component {
     state = {
