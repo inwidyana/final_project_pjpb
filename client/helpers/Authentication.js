@@ -40,14 +40,17 @@ export class Login extends Authentication {
             fetch(Login.API_URL, this.requestOptions)
                 .then(res => {
                     if (res.ok) {
-                        resolve({
-                            email: this.email,
-                            password: this.password,
-                            token: res._bodyText,
+                        res.json().then(responseJSON => {
+                            resolve({
+                                email: this.email,
+                                password: this.password,
+                                token: responseJSON.token,
+                            });
                         });
                     }
-
-                    reject(res.status);
+                    else {
+                        reject(res.status);
+                    }
                 })
                 .catch(err => reject(err));
         });
@@ -77,14 +80,17 @@ export class Registration extends Authentication {
             fetch(Registration.API_URL, this.requestOptions)
                 .then(res => {
                     if (res.ok) {
-                        resolve({
-                            email: this.email,
-                            password: this.password,
-                            token: res._bodyText,
+                        res.json().then(responseJSON => {
+                            resolve({
+                                email: this.email,
+                                password: this.password,
+                                token: responseJSON.token,
+                            });
                         });
                     }
-
-                    reject(res.status);
+                    else {
+                        reject(res.status);
+                    }
                 })
                 .catch(err => reject(err));
         });

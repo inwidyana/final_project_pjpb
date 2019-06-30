@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Keypair from '../helpers/Keypair';
 import { StyleSheet, Button, TextInput, View, Spacer } from 'react-native';
 import { Registration as RegistrationRequest } from '../helpers/Authentication';
+import Token from '../helpers/Token';
 
 const BLUE = "#428AF8";
 const LIGHT_GRAY = "#D3D3D3";
@@ -60,6 +61,7 @@ export default class Registration extends Component {
         registration.setPassword(this.state.password);
         registration.setName(this.state.name);
         registration.send().then((auth) => {
+            (new Token(auth.token)).store();
             Keypair.generate().store();
             this.switchToHomeScreen()
         });

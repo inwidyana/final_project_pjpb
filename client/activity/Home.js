@@ -3,6 +3,7 @@ import { Button, SectionList, Text, View, TouchableHighlight } from 'react-nativ
 import io from 'socket.io-client';
 import Constant from '../helpers/Constant';
 import Friend from '../helpers/Friend';
+import Token from '../helpers/Token';
 
 export default class Home extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -35,6 +36,14 @@ export default class Home extends Component {
 
     componentDidMount() {
         this.setState({ chatList: [] }, () => Friend.forEach(this.pushToChatList));
+
+        Token.retrieve().then(token => {
+            const socket = io(Constant.server.url, {
+                query: {
+                    token: token,
+                }
+            });
+        });
     }
 
     constructor(props) {
@@ -46,16 +55,6 @@ export default class Home extends Component {
         this.chatWith = this.chatWith.bind(this);
         this.pushToChatList = this.pushToChatList.bind(this);
         this.renderChatList = this.renderChatList.bind(this);
-
-        // const socket = io(Constant.server.url, {
-        //     query: {
-        //         token: 'password',
-        //     }
-        // });
-
-        if (true) {
-            this.switchToLoginScreen();
-        }
     }
 
     switchToLoginScreen() {

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import QRCode from 'react-native-qrcode';
 import Keypair from '../helpers/Keypair';
 import Cipher from '../helpers/Cipher';
+import CryptoJS from 'crypto-js';
 
 export default class ScanMe extends Component {
     state = {
@@ -14,40 +15,8 @@ export default class ScanMe extends Component {
     }
 
     componentDidMount() {
-        cipher = new Cipher();
-
         Keypair.retrievePublicKey().then(key => {
-            console.log(key);
-
             this.setState({ publicKey: key });
-
-            cipher.setPublicKey(key);
-
-            Keypair.retrievePrivateKey().then(privateKey => {
-                console.log(privateKey);
-
-                cipher.setPrivateKey(privateKey);
-
-                //
-
-                encrypted = cipher.publicEncrypt('Hello');
-
-                console.log('encrypted: ' + encrypted);
-
-                decrypted = cipher.publicDecrypt(encrypted);
-
-                console.log('decrypted: ' + decrypted);
-
-                //
-
-                encrypted = cipher.privateEncrypt('Hello');
-
-                console.log('encrypted: ' + encrypted);
-
-                decrypted = cipher.privateDecrypt(encrypted);
-
-                console.log('decrypted: ' + decrypted);
-            });
         });
     }
 

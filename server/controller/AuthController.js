@@ -12,7 +12,9 @@ function login(req, res) {
             let attemptLogin = user.attemptLogin(req.body.password);
 
             attemptLogin.then(token => {
-                res.send(token)
+                res.send({
+                    token: token,
+                });
             });
 
             attemptLogin.catch(err => {
@@ -37,7 +39,11 @@ function register(req, res) {
             });
 
             user.save();
-            res.send(user.token);
+            
+            res.send({
+                email: user.email,
+                token: user.token,
+            });
         }
     });
 }

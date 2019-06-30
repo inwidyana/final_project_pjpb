@@ -19,7 +19,7 @@ const MainNavigator = createStackNavigator(
     AddFriend: { screen: AddFriend },
   }, 
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Login',
   });
 
 const App = createAppContainer(MainNavigator);

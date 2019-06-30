@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 import { Login as LoginRequest } from '../helpers/Authentication';
+import Token from '../helpers/Token';
 
 const BLUE = "#428AF8";
 const LIGHT_GRAY = "#D3D3D3";
@@ -64,7 +65,10 @@ export default class Login extends Component {
             let login = new LoginRequest();
             login.setEmail(this.state.email);
             login.setPassword(this.state.password);
-            login.send().then(auth => this.switchToHomeScreen());
+            login.send().then(auth => {
+                (new Token(auth.token)).store();
+                this.switchToHomeScreen()
+            });
         }
     }
 

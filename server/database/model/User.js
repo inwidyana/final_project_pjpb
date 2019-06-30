@@ -6,6 +6,7 @@ UserSchema.pre('save', function(next) {
     let User = this;
 
     User.hashPassword();
+    User.getNewToken();
 
     next();
 });

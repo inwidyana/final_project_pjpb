@@ -1,4 +1,6 @@
 var RSAKey = require('react-native-rsa');
+import * as Crypto from 'expo-crypto';
+import CryptoJS from 'crypto-js';
 
 export default class Cipher {
     generateKeyPair() {
@@ -10,14 +12,23 @@ export default class Cipher {
         };
     }
 
+    static async hash(message) {
+        return Crypto.digestStringAsync(
+            Crypto.CryptoDigestAlgorithm.SHA256,
+            message
+        );
+    }
+
     setPublicKey(key) {
-        this._publicKey = key;
-        this._rsa.setPublicString(key);
+        this._privateKey = key;
+        this._rsa.setPrivateString(key);
     }
 
     setPrivateKey(key) { 
-        this._privateKey = key;
-        this._rsa.setPrivateString(key);
+        
+
+        this._publicKey = key;
+        this._rsa.setPublicString(key);
     }
 
     encrypt(message) {

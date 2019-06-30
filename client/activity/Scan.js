@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as Permissions from 'expo-permissions';
 
 export default class Scan extends Component {
     state = {
@@ -49,14 +50,10 @@ export default class Scan extends Component {
                             <Text style={{ color: '#fff' }}>
                                 Camera permission is not granted
                             </Text>
-                        : 
+                        :
                             <BarCodeScanner
-                                onBarCodeRead={this._handleBarCodeRead}
-                                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-                                style={{
-                                    height: Dimensions.get('window').height,
-                                    width: Dimensions.get('window').width,
-                                }}
+                                onBarCodeScanned={this._handleBarCodeRead}
+                                style={StyleSheet.absoluteFillObject}
                             />
                 }
 
